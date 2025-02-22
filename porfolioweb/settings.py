@@ -169,8 +169,8 @@ ALLOWED_HOSTS = [
 
 # cors authorization 
 CORS_ALLOWED_ORIGINS = [
-    "https://my-porfolio-8hcw.onrender.com",  # Backend en Render
-    "https://mi-porfolio.vercel.app",  # Frontend en Vercel
+    "https://my-porfolio-blond.vercel.app",  # Dominio del frontend en Vercel
+    "https://my-porfolio-8hcw.onrender.com",  # Dominio del backend en Render
 ]
 
 
