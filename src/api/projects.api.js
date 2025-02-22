@@ -3,6 +3,6 @@ import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const obtenerProjects =  () => {
-   return axios.get(`${API_URL}/project/`)
+   return axios.get(`${API_URL}/api/project/`)
 
 }
