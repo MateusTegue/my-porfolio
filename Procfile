@@ -1,1 +1,1 @@
-web: python3 manage.py collectstatic && gunicorn porfolioweb.wsgi
+pip install whitenoise && python manage.py collectstatic && gunicorn porfolioweb.wsgi
