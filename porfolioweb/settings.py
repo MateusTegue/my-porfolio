@@ -30,6 +30,23 @@ SECRET_KEY = 'django-insecure-!!4ucvsob9ly3o*rsu2+#-b1en_6=2u*h*hiti+)#=vpf560k2
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "S7x3KqCdUOXvmixb9pJu0ojXXbxtc4a84ph928_ItyfHsSCQFp0X0P-r_gFC7ELCTnA")
 
 
+
+# settings.py
+
+# Configuración de AWS S3
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+# Configuración para archivos multimedia en S3
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+
+
+
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 DEBUG = 'RENDER' not in os.environ
