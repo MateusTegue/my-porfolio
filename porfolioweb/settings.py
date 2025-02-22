@@ -156,7 +156,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    os.getenv("RENDER_EXTERNAL_HOSTNAME", ""),
+    "my-porfolio-8hcw.onrender.com",
 ]
+
 
 
 # cors authorization 
