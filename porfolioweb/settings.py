@@ -8,17 +8,14 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
-"""
 
 from pathlib import Path
 import os
 import dj_database_url
 from dotenv import load_dotenv
-
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-from decouple import config 
 
 load_dotenv()
 
@@ -29,18 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "clave-segura-por-defecto")
 
 # DEBUG
-DEBUG = 'RENDER' not in os.environ
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 # ALLOWED_HOSTS
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "my-porfolio-8hcw.onrender.com",
-]
-
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "my-porfolio-8hcw.onrender.com"]
 
 # INSTALLED_APPS
 INSTALLED_APPS = [
@@ -52,20 +41,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'coreapi',
     'porfolio',
     'formacion',
     'blog',
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 # MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', 
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware', 
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -120,25 +106,9 @@ STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# MEDIA FILES (CORREGIDO)
+# MEDIA FILES
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # 🔴 CORREGIDO
-
-
-cloudinary.config( 
-  cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'), 
-  api_key=os.getenv('CLOUDINARY_API_KEY'), 
-  api_secret=os.getenv('CLOUDINARY_API_SECRET')
-)
-
-
-CLOUDINARY_URL = config("CLOUDINARY_URL")
-
-cloudinary.config(cloudinary_url=CLOUDINARY_URL)
-
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
-STATICFILES_STORAGE = "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
-
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 
@@ -155,3 +125,4 @@ REST_FRAMEWORK = {
 
 # DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
