@@ -1,2 +1,3 @@
-web: gunicorn porfolioweb.wsgi
+gunicorn porfolioweb.wsgi
+
 
