@@ -1,1 +1,1 @@
-web: gunicorn porfolioweb.wsgi
+web: web: python manage.py collectstatic && gunicorn porfolioweb.wsgi
