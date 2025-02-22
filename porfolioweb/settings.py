@@ -15,6 +15,8 @@ import os
 import dj_database_url
 from dotenv import load_dotenv
 load_dotenv()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,12 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!!4ucvsob9ly3o*rsu2+#-b1en_6=2u*h*hiti+)#=vpf560k2'
+# SECRET_KEY = 'django-insecure-!!4ucvsob9ly3o*rsu2+#-b1en_6=2u*h*hiti+)#=vpf560k2'
+
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "S7x3KqCdUOXvmixb9pJu0ojXXbxtc4a84ph928_ItyfHsSCQFp0X0P-r_gFC7ELCTnA")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = []
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:  ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
@@ -96,6 +104,7 @@ DATABASES = {
     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -145,17 +154,17 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ALLOWED_HOSTS = [
-    'locahost',
-    '127.0.0.1',
-    'my-porfolio-fawn-alpha.vercel.app'
+    "localhost",
+    "127.0.0.1",
 ]
 
 
 # cors authorization 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-    
+    "http://localhost:5173",  # Para el frontend en Vite
+    "http://127.0.0.1:5173",  # Alternativa si usas 127.0.0.1
 ]
+
 
 
 REST_FRAMEWORK = {
