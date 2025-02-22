@@ -1,3 +1,3 @@
-gunicorn porfolioweb.wsgi
+web: gunicorn porfolioweb.wsgi:application
 
 
