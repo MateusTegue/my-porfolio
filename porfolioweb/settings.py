@@ -169,9 +169,10 @@ ALLOWED_HOSTS = [
 
 # cors authorization 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Para el frontend en Vite
-    "http://127.0.0.1:5173",  # Alternativa si usas 127.0.0.1
+    "https://my-porfolio-8hcw.onrender.com",  # Backend en Render
+    "https://mi-porfolio.vercel.app",  # Frontend en Vercel
 ]
+
 
 
 
